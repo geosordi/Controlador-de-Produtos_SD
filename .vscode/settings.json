@@ -1,0 +1,7 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Users\\bruno.zampirom\\Downloads\\json-simple-1.1.1.jar",
+        "c:\\Users\\bruno.zampirom\\Downloads\\mongo-java-driver-3.12.5.jar"
+    ]
+}
