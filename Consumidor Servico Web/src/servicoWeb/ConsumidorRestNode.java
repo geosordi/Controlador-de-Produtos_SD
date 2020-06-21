@@ -59,12 +59,16 @@ public class ConsumidorRestNode {
         client = ClientBuilder.newClient();
         target = client.target(baseUri + "/alteracao");
         
+        try{
         String resposta = target
                 .request(MediaType.APPLICATION_FORM_URLENCODED)
                 .accept(MediaType.APPLICATION_JSON)
                 .put(Entity.entity(param, MediaType.APPLICATION_JSON), String.class);
         
         return resposta;
+        } catch (Exception e){
+            return "Código inexistente";
+        }
     }
     
     public String inclusao(Integer codigo, String descricao, float preco, Integer estoque){
