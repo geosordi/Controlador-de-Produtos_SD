@@ -95,19 +95,28 @@ app.post('/inclusao', (req, res) => { // Inclui um novo produto
     }
 })
 
-app.put('/alteracao', (req, res) => { // Atualiza um recurso ou inlcui caso não exista o id
+app.put('/alteracao', (req, res) => { // Atualiza um recurso caso o id seja encontrado
     const body = req.body;
     if(!body) res.status(400).send('Error: Os valores de inserção devem ser passados no body!');
     else {
-        if(!body.codigo || !body.descricao || !body.preco || !body.estoque) res.status(400).send('Error: Nem todos valores foram informados corretamente!');
+        if(!body.codigo || (!body.descricao && !body.preco && !body.estoque)) res.status(400).send('Error: Nem todos valores foram informados corretamente!');
         else {
-            if(Number.isInteger(body.codigo) && typeof body.descricao === 'string' && typeof body.preco === 'number' && Number.isInteger(body.estoque)) {
-                console.log(body);
-                db.collection('produtos').save( { _id: body.codigo, "descricao": body.descricao, "preco": body.preco, "estoque": body.estoque })
-                    .then(result => res.send("Valor atualizado com sucesso!"))
-                    .catch(err => {
-                        err.code === 11000 ? res.status(409).send("O codigo já foi inserido!") : res.status(400).send(err);
-                    });
+            if(Number.isInteger(body.codigo) && ((body.descricao && typeof body.descricao === 'string') || (body.preco && typeof body.preco === 'number') || (body.estoque && Number.isInteger(body.estoque)))) {
+                db.collection("produtos").findOne({ _id : body.codigo })
+                .then(product => {
+                    if(product) {
+                        console.log("Valor a ser atualizado: " + product);
+                        db.collection('produtos').save({ _id: body.codigo, "descricao": body.descricao, "preco": body.preco, "estoque": body.estoque })
+                            .then(result => res.send("Valor atualizado com sucesso!"))
+                            .catch(err => {
+                                res.status(400).send(err);
+                            });
+                    } else {
+                        res.status(409).send("Error: Nem um produto existente com o codigo informado");
+                    }
+                }).catch(err => {
+                    res.status(500).send("Error: " + err);
+                })
             }
             else res.status(400).send('Error: Os valores informados não estão no tipo correto!');
         }
