@@ -20,11 +20,6 @@ public class Consumidor {
         // TODO code application logic here
         Scanner in = new Scanner(System.in);
         ConsumidorRestNode consumer = new ConsumidorRestNode();
-        //System.out.println(consumer.inclusao(3, "HD", (float) 250.80, 7));
-        //System.out.println(consumer.alteracao(3, "HD", (float) 252.75, 3));
-        //System.out.println(consumer.exclusao(3));
-        //System.out.println(consumer.consulta(2));
-        //System.out.println(consumer.listagem());
         
         while(true){
             System.out.println("Digite 1 para Incluir\n"
