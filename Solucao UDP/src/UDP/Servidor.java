@@ -35,12 +35,10 @@ public class Servidor {
     public static void main(String[] args) throws Exception {
 
         int porta = 2006;
-        byte vetByte[] = new byte[100];
         DatagramSocket soc;
         DatagramPacket pacote;
 
         soc = new DatagramSocket(porta);
-        pacote = new DatagramPacket(vetByte, vetByte.length);
         System.out.println("Receptor escutando a porta: " + porta);
 
         System.out.println("Conectando-se ao banco de dados...");
@@ -54,8 +52,11 @@ public class Servidor {
         produtos = database.getCollection("produtos");
 
         while(true) {
+            byte buffer[] = new byte[256];
+            pacote = new DatagramPacket(buffer, buffer.length);
             soc.receive(pacote);
             String str = new String(pacote.getData(), pacote.getOffset(), pacote.getLength()); // verifica comprimento do DatagramPacket
+            System.out.println("\nServidor recebeu: "+str);
 
             String operacao = str.split(";")[0];
             int codigo = Integer.parseInt(str.split(";")[1]);
@@ -69,7 +70,11 @@ public class Servidor {
                 int novo = Integer.parseInt(str.split(";")[2]);
                 retornoMensagem = mongoUpdate(codigo, novo);
             }
-            System.out.println(retornoMensagem);
+            System.out.println("Servidor retornou codigo " + retornoMensagem);
+            // Retorno da mensagem para o cliente
+            buffer = retornoMensagem.getBytes();
+            pacote = new DatagramPacket(buffer, buffer.length, pacote.getAddress(), pacote.getPort());
+            soc.send(pacote);
             System.out.println("--------------------\n");
         }
     }
@@ -79,19 +84,19 @@ public class Servidor {
             Document produtoAlterado = new Document("preco", novo);
             System.out.println(produtoAlterado);
             Boolean resultadoAltera = alteraProduto(produtoAlterado, codigo);
-            return resultadoAltera ? "Produto alterado com sucesso!" : "Ocorreu um erro ao alterar o produto";
+            return resultadoAltera ? "0" : "1";
         }
-        return "Codigo de produto não existente";
+        return "2";
     }
 
     private static String mongoUpdate(int codigo, int novo) {
         if(verificaProdutoExistente(codigo)) {
-            Document produtoAlterado = new Document("preco", novo);
+            Document produtoAlterado = new Document("estoque", novo);
             System.out.println(produtoAlterado);
             Boolean resultadoAltera = alteraProduto(produtoAlterado, codigo);
-            return resultadoAltera ? "Produto alterado com sucesso!" : "Ocorreu um erro ao alterar o produto";
+            return resultadoAltera ? "0" : "1";
         }
-        return "Codigo de produto não existente";
+        return "2";
     }
 
     private static Boolean verificaProdutoExistente(int codigo) {
