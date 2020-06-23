@@ -39,7 +39,6 @@ public class Servidor {
     public static void main(String[] args) throws Exception {
 
         ServerSocket server;
-        Socket soc;
         int cont=0;
         System.out.println("Iniciando servidor...");
         server = new ServerSocket(2006);
@@ -58,17 +57,12 @@ public class Servidor {
         ThreadServidor.produtos = produtos;
 
         System.out.println("Aguardando conexões");
-        while(!ThreadServidor.encerra) {
+        while(true) {
             cont++;
-            soc = server.accept();
-            System.out.println(ThreadServidor.acumSuccess);
+            Socket soc = server.accept();
             System.out.println("Conexao estabelecida");
             ThreadServidor thread = new ThreadServidor("Thread_Servidor_" + cont, soc);
             thread.start();
-            thread.join();
         }
-        server.close();
-        mongoClient.close();
-        System.out.println("Servidor finalizado com exito!");
     }
 }

@@ -17,44 +17,40 @@ import org.json.simple.JSONObject;
  */
 public class ThreadServidor extends Thread {
     Socket soc;
-    static int acumTotal = 0;
-    static int acumSuccess = 0;
-    static int acumFail = 0;
-    static Boolean encerra = false;
+    ObjectInputStream entrada;
     static MongoCollection<Document> produtos;
 
-    public ThreadServidor(String label, Socket soc) {
+    public ThreadServidor(String label, Socket soc) throws IOException {
         this.setName(label);
         this.soc = soc;
     }
 
-
     public void run() {
-        ObjectInputStream entrada;
-        JSONObject  jsonObject;
-        String operacao;
         try {
-            acumTotal++;
             entrada = new ObjectInputStream(soc.getInputStream());
-            jsonObject = (JSONObject) entrada.readObject();
-            operacao = (String) jsonObject.get("tipoOperacao");
-            System.out.println(this.getName() + " operacação: " + operacao);
-            if(operacao.equals("alteracao")) {
-                String retornoMensagem = mongoUpdate(jsonObject);
-                doSendAsync(soc, retornoMensagem);
-            }
-            else if(operacao.equals("inclusao")) {
-                String retornoMensagem = mongoInsert(jsonObject);
-                doSendAsync(soc, retornoMensagem);
-            }
-            else if(operacao.equals("encerra")) {
-                doSendAsync(soc, "Servidor Encerrou!");
-                encerra = true;
-            }
-            this.soc.close();
-        } catch (IOException | ClassNotFoundException e) {
-            doSendAsync(soc, "Erro no servico: "+ e.getMessage());
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
+        }
+        while (true) {
+            try {
+                JSONObject jsonObject = (JSONObject) entrada.readObject();
+                String operacao = (String) jsonObject.get("tipoOperacao");
+                System.out.println(this.getName() + " operacação: " + operacao);
+                if (operacao.equals("alteracao")) {
+                    String retornoMensagem = mongoUpdate(jsonObject);
+                    doSendAsync(soc, retornoMensagem);
+                } else if (operacao.equals("inclusao")) {
+                    String retornoMensagem = mongoInsert(jsonObject);
+                    doSendAsync(soc, retornoMensagem);
+                } else if (operacao.equals("encerra")) {
+                    doSendAsync(soc, "Servidor Encerrou!");
+                    break;
+                }
+            } catch (IOException | ClassNotFoundException e1) {
+                e1.printStackTrace();
+                break;
+            }
         }
         System.out.println(this.getName() + " encerrou.");
     }
@@ -63,11 +59,8 @@ public class ThreadServidor extends Thread {
         try {
             ObjectOutputStream saida = new ObjectOutputStream(soc.getOutputStream());
             saida.writeObject(msg);
-            saida.close();
-            acumSuccess++;
             return true;
         } catch (IOException e) {
-            acumFail++;
             e.printStackTrace();;
         }
         return false;
@@ -103,11 +96,6 @@ public class ThreadServidor extends Thread {
     private static Boolean verificaProdutoExistente(int codigo) {
         Document produtoDocument = new Document("_id", codigo);
         return produtos.countDocuments(produtoDocument) > 0 ? true : false;
-    }
-
-    private static Document retornaProduto(int codigo) {
-        Document produtoDocument = new Document("_id", codigo);
-        return produtos.find(produtoDocument).first();
     }
 
     private static Boolean alteraProduto(Document produto, int codigo) {
