@@ -5,6 +5,12 @@
  */
 package servicoWeb;
 
+/*
+    Jars necessários:
+        * JAX-RS 2.0
+        * Jersey 2.5.1
+*/
+
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
