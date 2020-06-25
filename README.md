@@ -1,4 +1,4 @@
-# Aplicacoes_Ditribuidas
+# Controlador de Produtos
 Trabalho de implementação de Aplicações Distribuídas
 
 ## Motivação
