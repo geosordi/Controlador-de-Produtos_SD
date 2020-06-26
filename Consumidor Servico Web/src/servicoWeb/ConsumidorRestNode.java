@@ -24,6 +24,7 @@ import org.json.simple.JSONObject;
  *
  * @author Geovani Sordi
  */
+
 public class ConsumidorRestNode {
     private String baseUri = "http://localhost:3000";
     private Client client = null;

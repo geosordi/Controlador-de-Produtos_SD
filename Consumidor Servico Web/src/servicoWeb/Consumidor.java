@@ -12,6 +12,7 @@ import java.util.Scanner;
  * @author Geovani Sordi
  */
 public class Consumidor {
+    
     /**
      * @param args the command line arguments
      */
