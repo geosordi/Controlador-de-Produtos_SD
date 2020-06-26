@@ -12,7 +12,7 @@ import java.util.Scanner;
  * @author Geovani Sordi
  */
 public class Consumidor {
-
+    
     /**
      * @param args the command line arguments
      */
@@ -69,7 +69,6 @@ public class Consumidor {
                 System.out.println("** Sair selecionado **\n");
                 System.exit(0);
             }
-            
         }
     }   
 }
