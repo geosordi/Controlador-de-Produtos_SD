@@ -65,7 +65,6 @@ public class ConsumidorRestNode {
                     .request(MediaType.APPLICATION_JSON)
                     .build("DELETE", Entity.entity(param2, MediaType.APPLICATION_JSON))
                     .invoke(String.class);
-
             return resposta;
         } catch (Exception e){
             return "Código não existe";
