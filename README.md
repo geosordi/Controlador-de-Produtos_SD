@@ -38,7 +38,7 @@ Implementar métodos para acessar as funcionalidades do serviço.
 Como tecnologia utilizada no banco de dados foi optado por utilizar o Mongo pela produtividade que o mesmo oferece. A base de dados está hospedado na nuvem, não tendo necessidade de confira-lo localmente.
 
 ## Jars necessários
-- [json simple](https://code.google.com/archive/p/json-simple/downloads) versão 1.1.1
+- [json](https://mvnrepository.com/artifact/org.json/json/20200518) versão 20200518
 - [mongo](https://jar-download.com/artifacts/org.mongodb/mongo-java-driver) versão 3.12.5
 - [JAX-RS](https://download.oracle.com/otndocs/jcp/jaxrs-2_0-fr-spec/index.html) versão 2.0
 - [Jersey](https://jar-download.com/artifacts/org.glassfish.jersey.core/jersey-client/2.5.1/source-code) versão 2.5.1
