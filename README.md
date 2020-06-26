@@ -56,5 +56,5 @@ npm run dev
 ## Desenvolvedores
 |name|email|course|
 | -------- | -------- | -------- |
-|Bruno Zampirom|158788@upf.br|Ciências da Computação - UPF|
-|Geovani Sordi|141974@upf.br|Ciências da Computação - UPF|
+|Bruno Zampirom|158788@upf.br|Ciência da Computação - UPF|
+|Geovani Sordi|141974@upf.br|Ciência da Computação - UPF|
