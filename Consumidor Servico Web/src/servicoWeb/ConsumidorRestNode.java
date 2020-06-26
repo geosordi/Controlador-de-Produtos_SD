@@ -9,6 +9,7 @@ package servicoWeb;
     Jars necessários:
         * JAX-RS 2.0
         * Jersey 2.5.1
+        * json-simple-1.1.1.jar
 */
 
 import javax.ws.rs.client.Client;
@@ -17,6 +18,7 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import org.glassfish.jersey.client.ClientProperties;
+import org.json.simple.JSONObject;
 
 /**
  *
@@ -30,7 +32,16 @@ public class ConsumidorRestNode {
     public String listagem(){
         client = ClientBuilder.newClient();
         target = client.target(baseUri + "/");
-        return target.request().get(String.class);
+        //return target.request().get(String.class);
+        String str = target.request().get(String.class);        
+        String[] s = str.split("},");
+        for (String item : s) {
+            if(! item.contains("}]"))
+                System.out.println(item + "},\n");
+            else
+                System.out.println(item);
+        }
+        return "Listagem finalizada";
     }
     
     public String consulta(Integer codigo){
@@ -44,14 +55,15 @@ public class ConsumidorRestNode {
     }
     
     public String exclusao(Integer codigo){
-        String param = "{\"codigo\":" + codigo + "}";
+        JSONObject param = writeJsonExcluir(codigo);
+        String param2 = param.toJSONString();
         client = ClientBuilder.newClient();    
         client.property(ClientProperties.SUPPRESS_HTTP_COMPLIANCE_VALIDATION, true);
         target = client.target(baseUri + "/exclusao");
         try{
             String resposta = target
                     .request(MediaType.APPLICATION_JSON)
-                    .build("DELETE", Entity.entity(param, MediaType.APPLICATION_JSON))
+                    .build("DELETE", Entity.entity(param2, MediaType.APPLICATION_JSON))
                     .invoke(String.class);
 
             return resposta;
@@ -61,7 +73,8 @@ public class ConsumidorRestNode {
     }
     
     public String alteracao(Integer codigo, String descricao, float preco, Integer estoque){
-        String param = "{\"codigo\":" + codigo + ", \"descricao\":\"" + descricao + "\", \"preco\":" + preco + ", \"estoque\":" + estoque + "}";
+        JSONObject param = writeJsonAlteracao(codigo, descricao, preco, estoque);
+        String param2 = param.toJSONString();
         client = ClientBuilder.newClient();
         target = client.target(baseUri + "/alteracao");
         
@@ -69,7 +82,7 @@ public class ConsumidorRestNode {
         String resposta = target
                 .request(MediaType.APPLICATION_FORM_URLENCODED)
                 .accept(MediaType.APPLICATION_JSON)
-                .put(Entity.entity(param, MediaType.APPLICATION_JSON), String.class);
+                .put(Entity.entity(param2, MediaType.APPLICATION_JSON), String.class);
         
         return resposta;
         } catch (Exception e){
@@ -78,18 +91,50 @@ public class ConsumidorRestNode {
     }
     
     public String inclusao(Integer codigo, String descricao, float preco, Integer estoque){
-        String param = "{\"codigo\":" + codigo + ", \"descricao\":\"" + descricao + "\", \"preco\":" + preco + ", \"estoque\":" + estoque + "}";
-        
+        JSONObject param = writeJsonInclusao(codigo, descricao, preco, estoque);
+        String param2 = param.toJSONString();
+       
         client = ClientBuilder.newClient();
         target = client.target(baseUri + "/inclusao");
         try{
             String resposta = target
                     .request(MediaType.APPLICATION_FORM_URLENCODED)
                     .accept(MediaType.APPLICATION_JSON)
-                    .post(Entity.entity(param, MediaType.APPLICATION_JSON), String.class);
+                    .post(Entity.entity(param2, MediaType.APPLICATION_JSON), String.class);
             return resposta;
         } catch (Exception e){
             return "Código duplicado";
         }
     }
+    
+    public static JSONObject writeJsonExcluir(Integer codigo){
+        JSONObject jsonObject = new JSONObject();
+        
+        jsonObject.put("codigo", codigo);
+        
+        return  jsonObject;
+    }
+    
+    public static JSONObject writeJsonAlteracao(Integer codigo, String descricao, float preco, Integer estoque){
+        JSONObject jsonObject = new JSONObject();
+        
+        jsonObject.put("codigo", codigo);
+        jsonObject.put("descricao", descricao);
+        jsonObject.put("preco", preco);
+        jsonObject.put("estoque", estoque);
+        
+        return jsonObject;
+    }
+    
+    public static JSONObject writeJsonInclusao(Integer codigo, String descricao, float preco, Integer estoque){
+        JSONObject jsonObject = new JSONObject();
+        
+        jsonObject.put("codigo", codigo);
+        jsonObject.put("descricao", descricao);
+        jsonObject.put("preco", preco);
+        jsonObject.put("estoque", estoque);
+        
+        return jsonObject;
+    }
+    
 }
