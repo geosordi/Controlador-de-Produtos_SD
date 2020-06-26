@@ -60,11 +60,11 @@ app.get('/:id', (req, res) => { // Consulta um produto
         })
 })
 
-app.delete('/exclusao', (req, res) => { // Exclui um produto
-    const body = req.body;
-    if(!body || !body.codigo || !Number.isInteger(body.codigo)) res.status(400).send('Error: O body está incorreto!');
+app.delete('/exclusao/:id', (req, res) => { // Exclui um produto
+    const _id = parseInt(req.params.id, 10);
+    if(!_id || !Number.isInteger(_id)) res.status(400).send('Error: O _id está incorreto!');
 
-    db.collection('produtos').findOneAndDelete({_id: body.codigo})
+    db.collection('produtos').findOneAndDelete({ _id })
       .then(deletedDocument => {
         if(deletedDocument.value) {
             res.send(`Success: Produto deletado com sucesso!`);

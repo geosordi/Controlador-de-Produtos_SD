@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"codigo\": 5,\r\n    \"descricao\": \"Pendrive\",\r\n    \"preco\": 31.99,\r\n    \"estoque\": 5\r\n}",
+					"raw": "{\r\n    \"codigo\": 5,\r\n    \"descricao\": \"Pendrive\",\r\n    \"preco\": 30.99,\r\n    \"estoque\": 5\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -68,7 +68,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"codigo\": 1\r\n}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -76,14 +76,15 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/exclusao",
+					"raw": "http://localhost:3000/exclusao/132",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"exclusao"
+						"exclusao",
+						"132"
 					]
 				}
 			},
