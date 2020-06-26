@@ -9,7 +9,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 
 import org.bson.Document;
-import org.json.simple.JSONObject;
+import org.json.JSONObject;
 
 /**
  *
@@ -34,8 +34,8 @@ public class ThreadServidor extends Thread {
         }
         while (true) {
             try {
-                JSONObject jsonObject = (JSONObject) entrada.readObject();
-                String operacao = (String) jsonObject.get("tipoOperacao");
+                JSONObject jsonObject = new JSONObject((String) entrada.readObject());
+                String operacao = jsonObject.get("tipoOperacao").toString();
                 System.out.println(this.getName() + " operacação: " + operacao);
                 if (operacao.equals("alteracao")) {
                     String retornoMensagem = mongoUpdate(jsonObject);
@@ -83,7 +83,7 @@ public class ThreadServidor extends Thread {
         if(!verificaProdutoExistente(codigo)) {
             Document produtoInclusao = new Document("_id", (int) produto.get("codigo"))
                 .append("descricao", (String) produto.get("descricao"))
-                .append("preco", (Float) produto.get("preco"))
+                .append("preco", Float.parseFloat(produto.get("preco").toString()))
                 .append("estoque", (int) produto.get("estoque"));
             System.out.println("produtoInclusao");
             System.out.println(produtoInclusao);

@@ -10,7 +10,7 @@
     encerrando a conexão com o servidor.
 
     Jars necessários:
-        * json-simple-1.1.1.jar
+        * org.json https://mvnrepository.com/artifact/org.json/json/20200518
         * mongo-java-driver-3.12.5.jar
 
 */
@@ -22,7 +22,7 @@ import java.io.ObjectInputStream;
 import java.io.IOException;
 import java.net.Socket;
 
-import org.json.simple.JSONObject;
+import org.json.JSONObject;
 
 /**
  *
@@ -108,7 +108,7 @@ public class Cliente extends Thread {
 
     private boolean doSendAsync(Socket soc, JSONObject msg) {
         try {
-            saida.writeObject(msg);
+            saida.writeObject(msg.toString());
             saida.flush();
             System.out.println("Thread cliente enviou: " + msg);
             return true;

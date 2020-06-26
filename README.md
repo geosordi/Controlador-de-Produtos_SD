@@ -37,8 +37,12 @@ Implementar métodos para acessar as funcionalidades do serviço.
 ## Banco de dados
 Como tecnologia utilizada no banco de dados foi optado por utilizar o Mongo pela produtividade que o mesmo oferece. A base de dados está hospedado na nuvem, não tendo necessidade de confira-lo localmente.
 
+Para visualizar os dados que estão sendo armazenados pode ser baixado o MongoDB Compass e acessar com: mongodb+srv://brunozampirom:CheykSRTYY2nw44L@cluster0-wn3ai.mongodb.net/Cluster0?authSource=admin&replicaSet=Cluster0-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true
+
+OBS: Mongo arredonda os números em ponto flutante.
+
 ## Jars necessários
-- [json simple](https://code.google.com/archive/p/json-simple/downloads) versão 1.1.1
+- [json](https://mvnrepository.com/artifact/org.json/json/20200518) versão 20200518
 - [mongo](https://jar-download.com/artifacts/org.mongodb/mongo-java-driver) versão 3.12.5
 - [JAX-RS](https://download.oracle.com/otndocs/jcp/jaxrs-2_0-fr-spec/index.html) versão 2.0
 - [Jersey](https://jar-download.com/artifacts/org.glassfish.jersey.core/jersey-client/2.5.1/source-code) versão 2.5.1
@@ -52,5 +56,5 @@ npm run dev
 ## Desenvolvedores
 |name|email|course|
 | -------- | -------- | -------- |
-|Bruno Zampirom|158788@upf.br|Ciências da Computação - UPF|
-|Geovani Sordi|141974@upf.br|Ciências da Computação - UPF|
+|Bruno Zampirom|158788@upf.br|Ciência da Computação - UPF|
+|Geovani Sordi|141974@upf.br|Ciência da Computação - UPF|
