@@ -1,0 +1,20 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Users\\bruno.zampirom\\Downloads\\mongo-java-driver-3.12.5.jar",
+        "c:\\Users\\bruno.zampirom\\Downloads\\javax.ws.rs-api-2.0-sources (1).jar",
+        "c:\\Users\\bruno.zampirom\\Downloads\\jar_files (2)\\asm-all-repackaged-2.2.0-b21.jar",
+        "c:\\Users\\bruno.zampirom\\Downloads\\jar_files (2)\\cglib-2.2.0-b21.jar",
+        "c:\\Users\\bruno.zampirom\\Downloads\\jar_files (2)\\guava-14.0.1.jar",
+        "c:\\Users\\bruno.zampirom\\Downloads\\jar_files (2)\\hk2-api-2.2.0-b21.jar",
+        "c:\\Users\\bruno.zampirom\\Downloads\\jar_files (2)\\hk2-locator-2.2.0-b21.jar",
+        "c:\\Users\\bruno.zampirom\\Downloads\\jar_files (2)\\hk2-utils-2.2.0-b21.jar",
+        "c:\\Users\\bruno.zampirom\\Downloads\\jar_files (2)\\javax.annotation-api-1.2.jar",
+        "c:\\Users\\bruno.zampirom\\Downloads\\jar_files (2)\\javax.inject-2.2.0-b21.jar",
+        "c:\\Users\\bruno.zampirom\\Downloads\\jar_files (2)\\javax.ws.rs-api-2.0.jar",
+        "c:\\Users\\bruno.zampirom\\Downloads\\jar_files (2)\\jersey-client-2.5.1.jar",
+        "c:\\Users\\bruno.zampirom\\Downloads\\jar_files (2)\\jersey-common-2.5.1.jar",
+        "c:\\Users\\bruno.zampirom\\Downloads\\jar_files (2)\\osgi-resource-locator-1.0.1.jar",
+        "c:\\Users\\bruno.zampirom\\Downloads\\json-20200518.jar"
+    ]
+}

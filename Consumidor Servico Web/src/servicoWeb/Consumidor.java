@@ -69,6 +69,7 @@ public class Consumidor {
                 System.out.println("** Sair selecionado **\n");
                 System.exit(0);
             }
+            System.out.println();
         }
     }   
 }

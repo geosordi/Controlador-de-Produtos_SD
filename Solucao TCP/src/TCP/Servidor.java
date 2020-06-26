@@ -9,7 +9,7 @@
     não. Ao receber a mensagem de final de trabalho, encerrar a conexão e a thread.
 
     Jars necessários:
-        * json-simple-1.1.1.jar
+        * org.json https://mvnrepository.com/artifact/org.json/json/20200518
         * mongo-java-driver-3.12.5.jar
 
 */
