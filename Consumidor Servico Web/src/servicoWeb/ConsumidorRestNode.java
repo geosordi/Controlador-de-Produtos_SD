@@ -59,13 +59,9 @@ public class ConsumidorRestNode {
         String param2 = param.toJSONString();
         client = ClientBuilder.newClient();    
         client.property(ClientProperties.SUPPRESS_HTTP_COMPLIANCE_VALIDATION, true);
-        target = client.target(baseUri + "/exclusao");
+        target = client.target(baseUri + "/exclusao/" + codigo);
         try{
-            String resposta = target
-                    .request(MediaType.APPLICATION_JSON)
-                    .build("DELETE", Entity.entity(param2, MediaType.APPLICATION_JSON))
-                    .invoke(String.class);
-            return resposta;
+            return target.request().delete(String.class);
         } catch (Exception e){
             return "Código não existe";
         }
@@ -134,6 +130,5 @@ public class ConsumidorRestNode {
         jsonObject.put("estoque", estoque);
         
         return jsonObject;
-    }
-    
+    }    
 }
