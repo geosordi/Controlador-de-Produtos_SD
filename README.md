@@ -37,6 +37,10 @@ Implementar métodos para acessar as funcionalidades do serviço.
 ## Banco de dados
 Como tecnologia utilizada no banco de dados foi optado por utilizar o Mongo pela produtividade que o mesmo oferece. A base de dados está hospedado na nuvem, não tendo necessidade de confira-lo localmente.
 
+Para visualizar os dados que estão sendo armazenados pode ser baixado o MongoDB Compass e acessar com: mongodb+srv://brunozampirom:*****@cluster0-wn3ai.mongodb.net/Cluster0?authSource=admin&replicaSet=Cluster0-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true
+
+OBS: Mongo arredonda os números em ponto flutante.
+
 ## Jars necessários
 - [json](https://mvnrepository.com/artifact/org.json/json/20200518) versão 20200518
 - [mongo](https://jar-download.com/artifacts/org.mongodb/mongo-java-driver) versão 3.12.5
