@@ -68,8 +68,7 @@ public class Consumidor {
             } else if(optionNumber.equals("6")){
                 System.out.println("** Sair selecionado **\n");
                 System.exit(0);
-            }
-            
+            }           
         }
     }   
 }
