@@ -73,8 +73,6 @@ public class ConsumidorRestNode {
     }
     
     public String exclusao(Integer codigo){
-        JSONObject param = writeJsonExcluir(codigo);
-        String param2 = param.toString();
         client = ClientBuilder.newClient();    
         client.property(ClientProperties.SUPPRESS_HTTP_COMPLIANCE_VALIDATION, true);
         target = client.target(baseUri + "/exclusao/" + codigo);
