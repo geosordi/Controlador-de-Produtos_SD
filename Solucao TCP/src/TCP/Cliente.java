@@ -108,7 +108,7 @@ public class Cliente extends Thread {
 
     private boolean doSendAsync(Socket soc, JSONObject msg) {
         try {
-            saida.writeObject(msg);
+            saida.writeObject(msg.toString());
             saida.flush();
             System.out.println("Thread cliente enviou: " + msg);
             return true;
